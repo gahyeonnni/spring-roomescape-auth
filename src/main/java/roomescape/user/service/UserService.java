@@ -2,6 +2,8 @@ package roomescape.user.service;
 
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import roomescape.exception.ErrorCode;
+import roomescape.exception.business.BusinessException;
 import roomescape.exception.business.DuplicateEmailException;
 import roomescape.exception.business.InvalidCredentialsException;
 import roomescape.user.domain.Role;
@@ -33,6 +35,11 @@ public class UserService {
         User user = userFactory.create(request.name(), request.email(), request.password(), role);
         User saved = userRepository.save(user);
         return SignupResponse.from(saved);
+    }
+
+    public User getById(Long id) {
+        return userRepository.findById(id)
+                .orElseThrow(() -> new BusinessException(ErrorCode.USER_NOT_FOUND));
     }
 
     public User login(LoginRequest request) {

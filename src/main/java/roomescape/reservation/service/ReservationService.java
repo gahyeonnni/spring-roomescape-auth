@@ -18,7 +18,7 @@ import roomescape.reservationtime.service.ReservationTimeService;
 import roomescape.theme.domain.Theme;
 import roomescape.theme.service.ThemeService;
 import roomescape.user.domain.User;
-import roomescape.user.repository.UserRepository;
+import roomescape.user.service.UserService;
 
 import java.time.LocalDate;
 import java.util.List;
@@ -32,26 +32,25 @@ public class ReservationService {
     private final ReservationTimeService reservationTimeService;
     private final ThemeService themeService;
     private final ReservationFactory reservationFactory;
-    private final UserRepository userRepository;
+    private final UserService userService;
 
     public ReservationService(
             ReservationRepository reservationRepository,
             ReservationTimeService reservationTimeService,
             ThemeService themeService,
             ReservationFactory reservationFactory,
-            UserRepository userRepository
+            UserService userService
     ) {
         this.reservationRepository = reservationRepository;
         this.reservationTimeService = reservationTimeService;
         this.themeService = themeService;
         this.reservationFactory = reservationFactory;
-        this.userRepository = userRepository;
+        this.userService = userService;
     }
 
     @Transactional
     public ReservationResponse createReservation(ReservationRequest request, Long memberId) {
-        User member = userRepository.findById(memberId)
-                .orElseThrow(() -> new BusinessException(ErrorCode.USER_NOT_FOUND));
+        User member = userService.getById(memberId);
         ReservationTime time = reservationTimeService.getById(request.timeId());
         Theme theme = themeService.getById(request.themeId());
 

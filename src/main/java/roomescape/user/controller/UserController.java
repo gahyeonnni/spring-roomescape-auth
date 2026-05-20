@@ -1,5 +1,6 @@
 package roomescape.user.controller;
 
+import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.servlet.http.HttpSession;
 import jakarta.validation.Valid;
 import org.springframework.http.ResponseEntity;
@@ -15,6 +16,7 @@ import roomescape.user.service.UserService;
 import java.net.URI;
 import java.util.Map;
 
+@Tag(name = "사용자", description = "회원가입·로그인·로그아웃·내 정보 조회 API")
 @RestController
 @RequestMapping("/users")
 public class UserController {
@@ -46,8 +48,8 @@ public class UserController {
     }
 
     @LoginRequired
-    @GetMapping("/me")
-    public ResponseEntity<Map<String, String>> me(@LoginMember User loginUser) {
+    @GetMapping("/my-role")
+    public ResponseEntity<Map<String, String>> getMyRole(@LoginMember User loginUser) {
         return ResponseEntity.ok(Map.of("role", loginUser.getRole().name()));
     }
 }

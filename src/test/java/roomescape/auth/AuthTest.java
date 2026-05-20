@@ -88,32 +88,32 @@ class AuthTest {
     }
 
     @Test
-    @DisplayName("로그인 사용자의 role이 /users/me에서 올바르게 반환됨")
+    @DisplayName("로그인 사용자의 role이 /users/my-role에서 올바르게 반환됨")
     void 로그인_사용자_정보_조회() {
         RestAssured.given().log().all()
                 .cookie("JSESSIONID", loginAsUser())
-                .when().get("/users/me")
+                .when().get("/users/my-role")
                 .then().log().all()
                 .statusCode(200)
                 .body("role", equalTo("USER"));
     }
 
     @Test
-    @DisplayName("관리자 role이 /users/me에서 올바르게 반환됨")
+    @DisplayName("관리자 role이 /users/my-role에서 올바르게 반환됨")
     void 관리자_사용자_정보_조회() {
         RestAssured.given().log().all()
                 .cookie("JSESSIONID", loginAsAdmin())
-                .when().get("/users/me")
+                .when().get("/users/my-role")
                 .then().log().all()
                 .statusCode(200)
                 .body("role", equalTo("ADMIN"));
     }
 
     @Test
-    @DisplayName("미인증 사용자가 /users/me 호출 시 401")
+    @DisplayName("미인증 사용자가 /users/my-role 호출 시 401")
     void 미인증_사용자_정보_조회_실패() {
         RestAssured.given().log().all()
-                .when().get("/users/me")
+                .when().get("/users/my-role")
                 .then().log().all()
                 .statusCode(401);
     }

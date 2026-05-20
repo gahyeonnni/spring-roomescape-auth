@@ -23,8 +23,11 @@ document.addEventListener('DOMContentLoaded', () => {
 
 function loadReservations() {
   fetch('/reservations')
-    .then(res => res.json())
-    .then(renderReservations)
+    .then(res => {
+      if (res.status === 401) { window.location.href = '/login'; return null; }
+      return res.json();
+    })
+    .then(data => { if (data) renderReservations(data); })
     .catch(() => showToast('예약 조회에 실패했습니다.'));
 }
 

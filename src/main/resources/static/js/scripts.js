@@ -1,5 +1,21 @@
+const SESSION_HEADER = 'X-Session-Id';
+
+const _originalFetch = window.fetch.bind(window);
+window.fetch = function (url, options = {}) {
+  const sessionId = localStorage.getItem(SESSION_HEADER);
+  if (sessionId) {
+    options.headers = Object.assign({}, options.headers || {}, { [SESSION_HEADER]: sessionId });
+  }
+  return _originalFetch(url, options);
+};
+
+window.saveSession = function (sessionId) {
+  localStorage.setItem(SESSION_HEADER, sessionId);
+};
+
 window.logout = async function () {
   await fetch('/users/logout', { method: 'POST' });
+  localStorage.removeItem(SESSION_HEADER);
   window.location.href = '/login';
 };
 

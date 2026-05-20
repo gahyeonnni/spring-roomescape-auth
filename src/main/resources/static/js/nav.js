@@ -5,7 +5,7 @@ document.addEventListener('DOMContentLoaded', () => {
     toggle.addEventListener('click', () => nav.classList.toggle('open'));
   }
 
-  fetch('/users/me')
+  fetch('/users/my-role')
     .then(res => res.ok ? res.json() : null)
     .then(data => {
       const loggedIn = data !== null;

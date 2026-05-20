@@ -1,7 +1,5 @@
 package roomescape.page;
 
-import jakarta.servlet.http.HttpServletRequest;
-import jakarta.servlet.http.HttpSession;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 
@@ -34,13 +32,13 @@ public class PageController {
     }
 
     @GetMapping("/time")
-    public String time(HttpServletRequest request) {
-        return requireAdmin(request, "time");
+    public String time() {
+        return "time";
     }
 
     @GetMapping("/theme")
-    public String theme(HttpServletRequest request) {
-        return requireAdmin(request, "theme");
+    public String theme() {
+        return "theme";
     }
 
     @GetMapping("/popular")
@@ -49,19 +47,7 @@ public class PageController {
     }
 
     @GetMapping("/my-reservations")
-    public String myReservations(HttpServletRequest request) {
-        HttpSession session = request.getSession(false);
-        if (session == null || session.getAttribute("loginMemberId") == null) {
-            return "redirect:/login";
-        }
+    public String myReservations() {
         return "my-reservations";
-    }
-
-    private String requireAdmin(HttpServletRequest request, String template) {
-        HttpSession session = request.getSession(false);
-        if (session == null || !"ADMIN".equals(session.getAttribute("loginMemberRole"))) {
-            return "redirect:/home";
-        }
-        return template;
     }
 }

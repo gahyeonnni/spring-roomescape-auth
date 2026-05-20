@@ -9,6 +9,7 @@ import roomescape.auth.LoginMember;
 import roomescape.auth.LoginRequired;
 import roomescape.user.domain.User;
 import roomescape.user.dto.LoginRequest;
+import roomescape.user.dto.LoginResponse;
 import roomescape.user.dto.SignupRequest;
 import roomescape.user.dto.SignupResponse;
 import roomescape.user.service.UserService;
@@ -34,11 +35,11 @@ public class UserController {
     }
 
     @PostMapping("/login")
-    public ResponseEntity<Void> login(@Valid @RequestBody LoginRequest request, HttpSession session) {
+    public ResponseEntity<LoginResponse> login(@Valid @RequestBody LoginRequest request, HttpSession session) {
         User user = userService.login(request);
         session.setAttribute("loginMemberId", user.getId());
         session.setAttribute("loginMemberRole", user.getRole().name());
-        return ResponseEntity.ok().build();
+        return ResponseEntity.ok(new LoginResponse(session.getId()));
     }
 
     @PostMapping("/logout")

@@ -31,14 +31,14 @@ class ReservationControllerTest {
                 .body(Map.of("email", "user1@test.com", "password", "password1"))
                 .when().post("/users/login")
                 .then().statusCode(200)
-                .extract().cookie("JSESSIONID");
+                .extract().header("X-Session-Id");
     }
 
     @Test
     @DisplayName("예약 생성 성공")
     void 예약_생성_성공() {
         RestAssured.given().log().all()
-                .cookie("JSESSIONID", loginAsUser())
+                .header("X-Session-Id", loginAsUser())
                 .contentType(ContentType.JSON)
                 .body(Map.of("date", "2099-08-05", "timeId", 1, "themeId", 1))
                 .when().post("/reservations")
@@ -53,7 +53,7 @@ class ReservationControllerTest {
     @DisplayName("과거 날짜로 예약 생성 시 400")
     void 과거_날짜_예약_생성_실패() {
         RestAssured.given().log().all()
-                .cookie("JSESSIONID", loginAsUser())
+                .header("X-Session-Id", loginAsUser())
                 .contentType(ContentType.JSON)
                 .body(Map.of("date", "2020-01-01", "timeId", 1, "themeId", 1))
                 .when().post("/reservations")
@@ -66,7 +66,7 @@ class ReservationControllerTest {
     @DisplayName("중복 예약 생성 시 409")
     void 중복_예약_생성_실패() {
         RestAssured.given().log().all()
-                .cookie("JSESSIONID", loginAsUser())
+                .header("X-Session-Id", loginAsUser())
                 .contentType(ContentType.JSON)
                 .body(Map.of("date", "2099-12-01", "timeId", 1, "themeId", 1))
                 .when().post("/reservations")
@@ -79,7 +79,7 @@ class ReservationControllerTest {
     @DisplayName("존재하지 않는 timeId로 예약 생성 시 404")
     void 존재하지_않는_timeId_예약_생성_실패() {
         RestAssured.given().log().all()
-                .cookie("JSESSIONID", loginAsUser())
+                .header("X-Session-Id", loginAsUser())
                 .contentType(ContentType.JSON)
                 .body(Map.of("date", "2099-08-05", "timeId", 999, "themeId", 1))
                 .when().post("/reservations")
@@ -92,7 +92,7 @@ class ReservationControllerTest {
     @DisplayName("존재하지 않는 themeId로 예약 생성 시 404")
     void 존재하지_않는_themeId_예약_생성_실패() {
         RestAssured.given().log().all()
-                .cookie("JSESSIONID", loginAsUser())
+                .header("X-Session-Id", loginAsUser())
                 .contentType(ContentType.JSON)
                 .body(Map.of("date", "2099-08-05", "timeId", 1, "themeId", 999))
                 .when().post("/reservations")
@@ -105,7 +105,7 @@ class ReservationControllerTest {
     @DisplayName("예약 수정 성공")
     void 예약_수정_성공() {
         RestAssured.given().log().all()
-                .cookie("JSESSIONID", loginAsUser())
+                .header("X-Session-Id", loginAsUser())
                 .contentType(ContentType.JSON)
                 .body(Map.of("date", "2099-12-02", "timeId", 2))
                 .when().patch("/reservations/11")
@@ -119,7 +119,7 @@ class ReservationControllerTest {
     @DisplayName("이미 지난 예약 수정 시 400")
     void 과거_예약_수정_실패() {
         RestAssured.given().log().all()
-                .cookie("JSESSIONID", loginAsUser())
+                .header("X-Session-Id", loginAsUser())
                 .contentType(ContentType.JSON)
                 .body(Map.of("date", "2099-12-02", "timeId", 2))
                 .when().patch("/reservations/1")
@@ -132,7 +132,7 @@ class ReservationControllerTest {
     @DisplayName("예약 삭제 성공")
     void 예약_삭제_성공() {
         RestAssured.given().log().all()
-                .cookie("JSESSIONID", loginAsUser())
+                .header("X-Session-Id", loginAsUser())
                 .when().delete("/reservations/11")
                 .then().log().all()
                 .statusCode(204);
@@ -142,7 +142,7 @@ class ReservationControllerTest {
     @DisplayName("이미 지난 예약 삭제 시 400")
     void 과거_예약_삭제_실패() {
         RestAssured.given().log().all()
-                .cookie("JSESSIONID", loginAsUser())
+                .header("X-Session-Id", loginAsUser())
                 .when().delete("/reservations/1")
                 .then().log().all()
                 .statusCode(400)

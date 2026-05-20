@@ -31,7 +31,7 @@ class AuthTest {
                 .body(Map.of("email", "user1@test.com", "password", "password1"))
                 .when().post("/users/login")
                 .then().statusCode(200)
-                .extract().cookie("JSESSIONID");
+                .extract().header("X-Session-Id");
     }
 
     private String loginAsAdmin() {
@@ -40,7 +40,7 @@ class AuthTest {
                 .body(Map.of("email", "admin@test.com", "password", "admin"))
                 .when().post("/users/login")
                 .then().statusCode(200)
-                .extract().cookie("JSESSIONID");
+                .extract().header("X-Session-Id");
     }
 
     @Test
@@ -67,7 +67,7 @@ class AuthTest {
     @DisplayName("일반 사용자가 관리자 전용 API 호출 시 403")
     void 일반_유저_관리자_API_접근_실패() {
         RestAssured.given().log().all()
-                .cookie("JSESSIONID", loginAsUser())
+                .header("X-Session-Id", loginAsUser())
                 .contentType(ContentType.JSON)
                 .body(Map.of("startAt", "20:00", "finishAt", "21:00"))
                 .when().post("/times")
@@ -79,7 +79,7 @@ class AuthTest {
     @DisplayName("관리자는 관리자 전용 API 호출 가능")
     void 관리자_관리자_API_접근_성공() {
         RestAssured.given().log().all()
-                .cookie("JSESSIONID", loginAsAdmin())
+                .header("X-Session-Id", loginAsAdmin())
                 .contentType(ContentType.JSON)
                 .body(Map.of("startAt", "20:00", "finishAt", "21:00"))
                 .when().post("/times")
@@ -91,7 +91,7 @@ class AuthTest {
     @DisplayName("로그인 사용자의 role이 /users/my-role에서 올바르게 반환됨")
     void 로그인_사용자_정보_조회() {
         RestAssured.given().log().all()
-                .cookie("JSESSIONID", loginAsUser())
+                .header("X-Session-Id", loginAsUser())
                 .when().get("/users/my-role")
                 .then().log().all()
                 .statusCode(200)
@@ -102,7 +102,7 @@ class AuthTest {
     @DisplayName("관리자 role이 /users/my-role에서 올바르게 반환됨")
     void 관리자_사용자_정보_조회() {
         RestAssured.given().log().all()
-                .cookie("JSESSIONID", loginAsAdmin())
+                .header("X-Session-Id", loginAsAdmin())
                 .when().get("/users/my-role")
                 .then().log().all()
                 .statusCode(200)
@@ -122,7 +122,7 @@ class AuthTest {
     @DisplayName("로그인 사용자는 본인 예약만 조회됨")
     void 로그인_사용자_본인_예약_조회() {
         RestAssured.given().log().all()
-                .cookie("JSESSIONID", loginAsUser())
+                .header("X-Session-Id", loginAsUser())
                 .when().get("/reservations")
                 .then().log().all()
                 .statusCode(200);

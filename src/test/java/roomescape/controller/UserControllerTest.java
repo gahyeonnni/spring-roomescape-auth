@@ -26,7 +26,7 @@ class UserControllerTest {
     }
 
     @Test
-    @DisplayName("로그인 성공 시 200과 세션 쿠키 반환")
+    @DisplayName("로그인 성공 시 200과 X-Session-Id 헤더 반환")
     void 로그인_성공() {
         RestAssured.given().log().all()
                 .contentType(ContentType.JSON)
@@ -34,7 +34,7 @@ class UserControllerTest {
                 .when().post("/users/login")
                 .then().log().all()
                 .statusCode(200)
-                .cookie("JSESSIONID");
+                .header("X-Session-Id", org.hamcrest.Matchers.notNullValue());
     }
 
     @Test
@@ -69,10 +69,10 @@ class UserControllerTest {
                 .body(Map.of("email", "user1@test.com", "password", "password1"))
                 .when().post("/users/login")
                 .then().statusCode(200)
-                .extract().cookie("JSESSIONID");
+                .extract().header("X-Session-Id");
 
         RestAssured.given().log().all()
-                .cookie("JSESSIONID", session)
+                .header("X-Session-Id", session)
                 .when().post("/users/logout")
                 .then().log().all()
                 .statusCode(200);
@@ -86,15 +86,15 @@ class UserControllerTest {
                 .body(Map.of("email", "user1@test.com", "password", "password1"))
                 .when().post("/users/login")
                 .then().statusCode(200)
-                .extract().cookie("JSESSIONID");
+                .extract().header("X-Session-Id");
 
         RestAssured.given()
-                .cookie("JSESSIONID", session)
+                .header("X-Session-Id", session)
                 .when().post("/users/logout")
                 .then().statusCode(200);
 
         RestAssured.given().log().all()
-                .cookie("JSESSIONID", session)
+                .header("X-Session-Id", session)
                 .when().get("/reservations")
                 .then().log().all()
                 .statusCode(401);

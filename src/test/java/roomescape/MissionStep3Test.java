@@ -31,7 +31,7 @@ public class MissionStep3Test {
                 .body(Map.of("email", "user1@test.com", "password", "password1"))
                 .when().post("/users/login")
                 .then().statusCode(200)
-                .extract().cookie("JSESSIONID");
+                .extract().header("X-Session-Id");
     }
 
     private String loginAsAdmin() {
@@ -40,7 +40,7 @@ public class MissionStep3Test {
                 .body(Map.of("email", "admin@test.com", "password", "admin"))
                 .when().post("/users/login")
                 .then().statusCode(200)
-                .extract().cookie("JSESSIONID");
+                .extract().header("X-Session-Id");
     }
 
     @Test
@@ -53,7 +53,7 @@ public class MissionStep3Test {
         params.put("finishAt", "21:00");
 
         Integer newId = RestAssured.given().log().all()
-            .cookie("JSESSIONID", adminSession)
+            .header("X-Session-Id", adminSession)
             .contentType(ContentType.JSON)
             .body(params)
             .when().post("/times")
@@ -62,14 +62,14 @@ public class MissionStep3Test {
             .extract().path("id");
 
         RestAssured.given().log().all()
-            .cookie("JSESSIONID", userSession)
+            .header("X-Session-Id", userSession)
             .when().get("/times")
             .then().log().all()
             .statusCode(200)
             .body("size()", is(4));
 
         RestAssured.given().log().all()
-            .cookie("JSESSIONID", adminSession)
+            .header("X-Session-Id", adminSession)
             .when().delete("/times/" + newId)
             .then().log().all()
             .statusCode(204);
@@ -86,7 +86,7 @@ public class MissionStep3Test {
         reservation.put("themeId", 1);
 
         RestAssured.given().log().all()
-            .cookie("JSESSIONID", session)
+            .header("X-Session-Id", session)
             .contentType(ContentType.JSON)
             .body(reservation)
             .when().post("/reservations")
@@ -94,7 +94,7 @@ public class MissionStep3Test {
             .statusCode(201);
 
         RestAssured.given().log().all()
-            .cookie("JSESSIONID", session)
+            .header("X-Session-Id", session)
             .when().get("/times/available?date=2099-08-05&themeId=1")
             .then().log().all()
             .statusCode(200)

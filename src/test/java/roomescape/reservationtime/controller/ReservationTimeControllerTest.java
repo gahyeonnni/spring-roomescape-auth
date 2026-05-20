@@ -32,7 +32,7 @@ class ReservationTimeControllerTest {
                 .body(Map.of("email", "user1@test.com", "password", "password1"))
                 .when().post("/users/login")
                 .then().statusCode(200)
-                .extract().cookie("JSESSIONID");
+                .extract().header("X-Session-Id");
     }
 
     private String loginAsAdmin() {
@@ -41,14 +41,14 @@ class ReservationTimeControllerTest {
                 .body(Map.of("email", "admin@test.com", "password", "admin"))
                 .when().post("/users/login")
                 .then().statusCode(200)
-                .extract().cookie("JSESSIONID");
+                .extract().header("X-Session-Id");
     }
 
     @Test
     @DisplayName("시간 생성 성공")
     void 시간_생성_성공() {
         RestAssured.given().log().all()
-                .cookie("JSESSIONID", loginAsAdmin())
+                .header("X-Session-Id", loginAsAdmin())
                 .contentType(ContentType.JSON)
                 .body(Map.of("startAt", "20:00", "finishAt", "21:00"))
                 .when().post("/times")
@@ -61,7 +61,7 @@ class ReservationTimeControllerTest {
     @DisplayName("시간 전체 조회 성공")
     void 시간_전체_조회_성공() {
         RestAssured.given().log().all()
-                .cookie("JSESSIONID", loginAsUser())
+                .header("X-Session-Id", loginAsUser())
                 .when().get("/times")
                 .then().log().all()
                 .statusCode(200)
@@ -73,14 +73,14 @@ class ReservationTimeControllerTest {
     void 시간_삭제_성공() {
         String adminCookie = loginAsAdmin();
         Integer id = RestAssured.given().log().all()
-                .cookie("JSESSIONID", adminCookie)
+                .header("X-Session-Id", adminCookie)
                 .contentType(ContentType.JSON)
                 .body(Map.of("startAt", "20:00", "finishAt", "21:00"))
                 .when().post("/times")
                 .then().extract().path("id");
 
         RestAssured.given().log().all()
-                .cookie("JSESSIONID", adminCookie)
+                .header("X-Session-Id", adminCookie)
                 .when().delete("/times/" + id)
                 .then().log().all()
                 .statusCode(204);
@@ -90,7 +90,7 @@ class ReservationTimeControllerTest {
     @DisplayName("예약 가능 시간 조회 성공")
     void 예약_가능_시간_조회_성공() {
         RestAssured.given().log().all()
-                .cookie("JSESSIONID", loginAsUser())
+                .header("X-Session-Id", loginAsUser())
                 .when().get("/times/available?date=2026-05-10&themeId=1")
                 .then().log().all()
                 .statusCode(200)

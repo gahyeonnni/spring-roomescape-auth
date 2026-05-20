@@ -30,7 +30,7 @@ public class MissionStep1Test {
                 .body(Map.of("email", "user1@test.com", "password", "password1"))
                 .when().post("/users/login")
                 .then().statusCode(200)
-                .extract().cookie("JSESSIONID");
+                .extract().header("X-Session-Id");
     }
 
     @Test
@@ -38,14 +38,14 @@ public class MissionStep1Test {
         String session = loginAsUser();
 
         RestAssured.given().log().all()
-                .cookie("JSESSIONID", session)
+                .header("X-Session-Id", session)
                 .when().get("/times/available?date=2099-08-05&themeId=1")
                 .then().log().all()
                 .statusCode(200)
                 .body("size()", is(3));
 
         RestAssured.given().log().all()
-                .cookie("JSESSIONID", session)
+                .header("X-Session-Id", session)
                 .contentType(ContentType.JSON)
                 .body(Map.of("name", "테스터", "date", "2099-08-05", "timeId", 1, "themeId", 1))
                 .when().post("/reservations")
@@ -53,7 +53,7 @@ public class MissionStep1Test {
                 .statusCode(201);
 
         RestAssured.given().log().all()
-                .cookie("JSESSIONID", session)
+                .header("X-Session-Id", session)
                 .when().get("/times/available?date=2099-08-05&themeId=1")
                 .then().log().all()
                 .statusCode(200)

@@ -32,7 +32,7 @@ class AdminThemeControllerTest {
                 .body(Map.of("email", "admin@test.com", "password", "admin"))
                 .when().post("/users/login")
                 .then().statusCode(200)
-                .extract().cookie("JSESSIONID");
+                .extract().header("X-Session-Id");
     }
 
     private Map<String, String> themeBody() {
@@ -43,7 +43,7 @@ class AdminThemeControllerTest {
     @DisplayName("테마 생성 성공")
     void 테마_생성_성공() {
         RestAssured.given().log().all()
-                .cookie("JSESSIONID", loginAsAdmin())
+                .header("X-Session-Id", loginAsAdmin())
                 .contentType(ContentType.JSON)
                 .body(themeBody())
                 .when().post("/admin/themes")
@@ -56,7 +56,7 @@ class AdminThemeControllerTest {
     @DisplayName("테마 전체 조회 성공")
     void 테마_전체_조회_성공() {
         RestAssured.given().log().all()
-                .cookie("JSESSIONID", loginAsAdmin())
+                .header("X-Session-Id", loginAsAdmin())
                 .when().get("/admin/themes")
                 .then().log().all()
                 .statusCode(200)
@@ -68,14 +68,14 @@ class AdminThemeControllerTest {
     void 테마_삭제_성공() {
         String adminCookie = loginAsAdmin();
         Integer id = RestAssured.given().log().all()
-                .cookie("JSESSIONID", adminCookie)
+                .header("X-Session-Id", adminCookie)
                 .contentType(ContentType.JSON)
                 .body(themeBody())
                 .when().post("/admin/themes")
                 .then().extract().path("id");
 
         RestAssured.given().log().all()
-                .cookie("JSESSIONID", adminCookie)
+                .header("X-Session-Id", adminCookie)
                 .when().delete("/admin/themes/" + id)
                 .then().log().all()
                 .statusCode(204);

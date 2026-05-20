@@ -31,7 +31,7 @@ INSERT INTO theme (name, description, image_url) VALUES ('투투 어드벤쳐', 
 INSERT INTO theme (name, description, image_url) VALUES ('NOSTALGIA', '추억을 자극하는 감성 테마.', 'https://d1kqa23lh2nxjx.cloudfront.net/file/theme_info/nostalgia_sizedown.png');
 
 -- 유저 데이터
-INSERT INTO "user" (name, email, password, role) VALUES ('user1', 'user1@test.com', 'password1', 'USER');
+INSERT INTO "user" (name, email, password, role) VALUES ('user1', 'user1@test.com', 'password1', 'ADMIN');
 INSERT INTO "user" (name, email, password, role) VALUES ('user2', 'user2@test.com', 'password2', 'USER');
 INSERT INTO "user" (name, email, password, role) VALUES ('user3', 'user3@test.com', 'password3', 'USER');
 INSERT INTO "user" (name, email, password, role) VALUES ('user4', 'user4@test.com', 'password4', 'USER');

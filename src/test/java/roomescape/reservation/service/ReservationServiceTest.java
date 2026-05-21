@@ -12,6 +12,8 @@ import roomescape.reservation.dto.ReservationRequest;
 import roomescape.reservation.dto.ReservationResponse;
 import roomescape.reservation.dto.ReservationUpdateRequest;
 import roomescape.reservationtime.service.ReservationTimeService;
+import roomescape.user.domain.Role;
+import roomescape.user.domain.User;
 
 import java.time.LocalDate;
 
@@ -27,6 +29,13 @@ class ReservationServiceTest {
 
     @Autowired
     private ReservationTimeService reservationTimeService;
+
+    // reservation 11: member_id=1, theme_id=1(store_id=1)
+    // reservation 12: member_id=2, theme_id=1(store_id=1)
+    // reservation 1 (past): member_id=1
+    private User user(Long id) {
+        return User.restore(id, "test", "test@test.com", "pass", Role.USER);
+    }
 
     @Test
     @DisplayName("예약 생성 성공")
@@ -61,7 +70,7 @@ class ReservationServiceTest {
     void 예약_삭제_성공() {
         assertThat(reservationTimeService.getAvailableTimes(LocalDate.of(2099, 12, 1), 1L)).hasSize(1);
 
-        reservationService.deleteReservation(11L);
+        reservationService.deleteReservation(11L, user(1L));
 
         assertThat(reservationTimeService.getAvailableTimes(LocalDate.of(2099, 12, 1), 1L)).hasSize(2);
     }
@@ -69,7 +78,7 @@ class ReservationServiceTest {
     @Test
     @DisplayName("이미 지난 예약은 취소할 수 없다")
     void 과거_예약_취소_불가() {
-        assertThatThrownBy(() -> reservationService.deleteReservation(1L))
+        assertThatThrownBy(() -> reservationService.deleteReservation(1L, user(1L)))
                 .isInstanceOf(PastTimeCancelException.class)
                 .satisfies(e -> assertThat(((BusinessException) e).getErrorCode()).isEqualTo(ErrorCode.PAST_RESERVATION_CANCEL))
                 .hasMessage(ErrorCode.PAST_RESERVATION_CANCEL.getMessage());
@@ -79,7 +88,7 @@ class ReservationServiceTest {
     @DisplayName("예약 수정 성공")
     void 예약_수정_성공() {
         ReservationResponse response = reservationService.updateReservation(
-                11L, new ReservationUpdateRequest(LocalDate.of(2099, 12, 2), 2L));
+                11L, new ReservationUpdateRequest(LocalDate.of(2099, 12, 2), 2L), user(1L));
         assertThat(response.date()).isEqualTo(LocalDate.of(2099, 12, 2));
     }
 
@@ -87,7 +96,7 @@ class ReservationServiceTest {
     @DisplayName("이미 지난 예약은 수정할 수 없다")
     void 과거_예약_수정_불가() {
         assertThatThrownBy(() -> reservationService.updateReservation(
-                1L, new ReservationUpdateRequest(LocalDate.of(2099, 12, 2), 2L)))
+                1L, new ReservationUpdateRequest(LocalDate.of(2099, 12, 2), 2L), user(1L)))
                 .isInstanceOf(BusinessException.class)
                 .satisfies(e -> assertThat(((BusinessException) e).getErrorCode()).isEqualTo(ErrorCode.PAST_RESERVATION_UPDATE))
                 .hasMessage(ErrorCode.PAST_RESERVATION_UPDATE.getMessage());
@@ -97,7 +106,7 @@ class ReservationServiceTest {
     @DisplayName("변경하려는 날짜·시간이 과거면 수정 불가")
     void 새시간_과거면_수정_불가() {
         assertThatThrownBy(() -> reservationService.updateReservation(
-                11L, new ReservationUpdateRequest(LocalDate.now().minusDays(1), 2L)))
+                11L, new ReservationUpdateRequest(LocalDate.now().minusDays(1), 2L), user(1L)))
                 .isInstanceOf(BusinessException.class)
                 .satisfies(e -> assertThat(((BusinessException) e).getErrorCode()).isEqualTo(ErrorCode.PAST_TIME_RESERVATION))
                 .hasMessage(ErrorCode.PAST_TIME_RESERVATION.getMessage());
@@ -107,7 +116,7 @@ class ReservationServiceTest {
     @DisplayName("변경하려는 시간이 이미 예약된 경우 수정 불가")
     void 중복_예약_수정_불가() {
         assertThatThrownBy(() -> reservationService.updateReservation(
-                12L, new ReservationUpdateRequest(LocalDate.of(2099, 12, 1), 1L)))
+                12L, new ReservationUpdateRequest(LocalDate.of(2099, 12, 1), 1L), user(2L)))
                 .isInstanceOf(BusinessException.class)
                 .satisfies(e -> assertThat(((BusinessException) e).getErrorCode()).isEqualTo(ErrorCode.DUPLICATE_RESERVATION))
                 .hasMessage(ErrorCode.DUPLICATE_RESERVATION.getMessage());

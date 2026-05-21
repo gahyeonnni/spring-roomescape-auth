@@ -41,7 +41,8 @@ public class JdbcReservationRepository implements ReservationRepository {
                     rs.getLong("theme_id"),
                     rs.getString("theme_name"),
                     rs.getString("theme_description"),
-                    rs.getString("theme_image_url")
+                    rs.getString("theme_image_url"),
+                    rs.getLong("theme_store_id")
             )
     );
 
@@ -70,7 +71,8 @@ public class JdbcReservationRepository implements ReservationRepository {
                        u.id as member_id, u.name as member_name, u.email as member_email,
                        u.password as member_password, u.role as member_role,
                        rt.id as time_id, rt.start_at as time_start_at, rt.finish_at as time_finish_at,
-                       t.id as theme_id, t.name as theme_name, t.description as theme_description, t.image_url as theme_image_url
+                       t.id as theme_id, t.name as theme_name, t.description as theme_description,
+                       t.image_url as theme_image_url, t.store_id as theme_store_id
                 FROM reservation r
                 JOIN "user" u ON r.member_id = u.id
                 JOIN reservation_time rt ON r.time_id = rt.id
@@ -87,7 +89,8 @@ public class JdbcReservationRepository implements ReservationRepository {
                        u.id as member_id, u.name as member_name, u.email as member_email,
                        u.password as member_password, u.role as member_role,
                        rt.id as time_id, rt.start_at as time_start_at, rt.finish_at as time_finish_at,
-                       t.id as theme_id, t.name as theme_name, t.description as theme_description, t.image_url as theme_image_url
+                       t.id as theme_id, t.name as theme_name, t.description as theme_description,
+                       t.image_url as theme_image_url, t.store_id as theme_store_id
                 FROM reservation r
                 JOIN "user" u ON r.member_id = u.id
                 JOIN reservation_time rt ON r.time_id = rt.id
@@ -96,6 +99,25 @@ public class JdbcReservationRepository implements ReservationRepository {
                 ORDER BY r.date DESC, rt.start_at DESC
                 """;
         return jdbcTemplate.query(query, rowMapper, memberId);
+    }
+
+    @Override
+    public List<Reservation> findByStoreId(Long storeId) {
+        String query = """
+                SELECT r.id as reservation_id, r.date,
+                       u.id as member_id, u.name as member_name, u.email as member_email,
+                       u.password as member_password, u.role as member_role,
+                       rt.id as time_id, rt.start_at as time_start_at, rt.finish_at as time_finish_at,
+                       t.id as theme_id, t.name as theme_name, t.description as theme_description,
+                       t.image_url as theme_image_url, t.store_id as theme_store_id
+                FROM reservation r
+                JOIN "user" u ON r.member_id = u.id
+                JOIN reservation_time rt ON r.time_id = rt.id
+                JOIN theme t ON r.theme_id = t.id
+                WHERE t.store_id = ?
+                ORDER BY r.date DESC, rt.start_at DESC
+                """;
+        return jdbcTemplate.query(query, rowMapper, storeId);
     }
 
     @Override

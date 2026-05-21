@@ -4,6 +4,7 @@ import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import roomescape.auth.AdminOnly;
 import roomescape.auth.LoginMember;
 import roomescape.auth.LoginRequired;
 import roomescape.reservation.dto.ReservationRequest;
@@ -44,15 +45,16 @@ public class ReservationController {
     @PatchMapping("/{id}")
     public ResponseEntity<ReservationResponse> updateReservation(
             @PathVariable Long id,
-            @Valid @RequestBody ReservationUpdateRequest request
+            @Valid @RequestBody ReservationUpdateRequest request,
+            @LoginMember User loginUser
     ) {
-        return ResponseEntity.ok(reservationService.updateReservation(id, request));
+        return ResponseEntity.ok(reservationService.updateReservation(id, request, loginUser));
     }
 
     @LoginRequired
     @DeleteMapping("/{id}")
-    public ResponseEntity<Void> deleteReservation(@PathVariable Long id) {
-        reservationService.deleteReservation(id);
+    public ResponseEntity<Void> deleteReservation(@PathVariable Long id, @LoginMember User loginUser) {
+        reservationService.deleteReservation(id, loginUser);
         return ResponseEntity.noContent().build();
     }
 }

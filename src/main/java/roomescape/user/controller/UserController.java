@@ -39,7 +39,7 @@ public class UserController {
         User user = userService.login(request);
         session.setAttribute("loginMemberId", user.getId());
         session.setAttribute("loginMemberRole", user.getRole().name());
-        return ResponseEntity.ok(new LoginResponse(session.getId()));
+        return ResponseEntity.ok(new LoginResponse(session.getId(), user.getRole().name()));
     }
 
     @PostMapping("/logout")

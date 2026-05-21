@@ -21,6 +21,7 @@
     <nav class="nav">
       <a href="/theme" class="active">테마 관리</a>
       <a href="/time">시간 관리</a>
+      <a href="/manager">매장 관리</a>
       <a href="/">사용자 페이지</a>
     </nav>
     <button id="btn-logout" type="button" class="btn-logout" onclick="logout()">로그아웃</button>
@@ -37,7 +38,13 @@
   </div>
 
   <div id="theme-form" class="filter-card d-none" style="margin-bottom:20px;">
-    <div class="filter-row" style="grid-template-columns: 1fr 2fr 2fr auto;">
+    <div class="filter-row" style="grid-template-columns: 1fr 1fr 2fr 2fr auto;">
+      <div>
+        <label class="form-label">매장</label>
+        <select id="new-store" class="form-control">
+          <option value="">불러오는 중...</option>
+        </select>
+      </div>
       <div>
         <label class="form-label">이름</label>
         <input id="new-name" type="text" class="form-control" placeholder="테마 이름">
@@ -50,7 +57,7 @@
         <label class="form-label">이미지 URL</label>
         <input id="new-image" type="text" class="form-control" placeholder="https://...">
       </div>
-      <div style="display:flex;gap:8px;">
+      <div style="display:flex;gap:8px;align-items:flex-end;">
         <button id="save-theme" class="btn btn-success">확인</button>
         <button id="cancel-theme" class="btn btn-ghost">취소</button>
       </div>

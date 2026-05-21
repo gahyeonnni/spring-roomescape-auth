@@ -21,6 +21,7 @@ public enum ErrorCode {
 
     // 403 - FORBIDDEN
     FORBIDDEN(HttpStatus.FORBIDDEN, "관리자만 접근 가능합니다."),
+    FORBIDDEN_STORE_ACCESS(HttpStatus.FORBIDDEN, "해당 매장에 대한 접근 권한이 없습니다."),
 
     // 409 - CONFLICT
     DUPLICATE_EMAIL(HttpStatus.CONFLICT, "이미 사용 중인 이메일입니다."),

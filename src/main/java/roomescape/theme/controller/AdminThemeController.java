@@ -5,9 +5,11 @@ import jakarta.validation.Valid;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import roomescape.auth.AdminOnly;
+import roomescape.auth.LoginMember;
 import roomescape.theme.dto.AdminThemeRequest;
 import roomescape.theme.dto.AdminThemeResponse;
 import roomescape.theme.service.AdminThemeService;
+import roomescape.user.domain.User;
 
 import java.net.URI;
 import java.util.List;
@@ -25,21 +27,23 @@ public class AdminThemeController {
 
     @AdminOnly
     @PostMapping
-    public ResponseEntity<AdminThemeResponse> createTheme(@Valid @RequestBody AdminThemeRequest request) {
-        AdminThemeResponse response = adminThemeService.createTheme(request);
+    public ResponseEntity<AdminThemeResponse> createTheme(
+            @Valid @RequestBody AdminThemeRequest request,
+            @LoginMember User loginUser) {
+        AdminThemeResponse response = adminThemeService.createTheme(request, loginUser);
         return ResponseEntity.created(URI.create("/admin/themes/" + response.id())).body(response);
     }
 
     @AdminOnly
     @GetMapping
-    public ResponseEntity<List<AdminThemeResponse>> getThemes() {
-        return ResponseEntity.ok(adminThemeService.getAllThemes());
+    public ResponseEntity<List<AdminThemeResponse>> getThemes(@LoginMember User loginUser) {
+        return ResponseEntity.ok(adminThemeService.getAllThemes(loginUser));
     }
 
     @AdminOnly
     @DeleteMapping("/{id}")
-    public ResponseEntity<Void> deleteTheme(@PathVariable Long id) {
-        adminThemeService.deleteTheme(id);
+    public ResponseEntity<Void> deleteTheme(@PathVariable Long id, @LoginMember User loginUser) {
+        adminThemeService.deleteTheme(id, loginUser);
         return ResponseEntity.noContent().build();
     }
 }

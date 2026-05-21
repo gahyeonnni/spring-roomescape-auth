@@ -26,24 +26,25 @@ class AdminThemeControllerTest {
         RestAssured.port = port;
     }
 
-    private String loginAsAdmin() {
+    // manager1: id=7, manages store 1 (테마A, 테마B)
+    private String loginAsManager() {
         return RestAssured.given()
                 .contentType(ContentType.JSON)
-                .body(Map.of("email", "admin@test.com", "password", "admin"))
+                .body(Map.of("email", "manager1@test.com", "password", "manager1"))
                 .when().post("/users/login")
                 .then().statusCode(200)
                 .extract().header("X-Session-Id");
     }
 
-    private Map<String, String> themeBody() {
-        return Map.of("name", "테마5", "description", "설명", "imageUrl", "https://image.com");
+    private Map<String, Object> themeBody() {
+        return Map.of("name", "테마5", "description", "설명", "imageUrl", "https://image.com", "storeId", 1);
     }
 
     @Test
     @DisplayName("테마 생성 성공")
     void 테마_생성_성공() {
         RestAssured.given().log().all()
-                .header("X-Session-Id", loginAsAdmin())
+                .header("X-Session-Id", loginAsManager())
                 .contentType(ContentType.JSON)
                 .body(themeBody())
                 .when().post("/admin/themes")
@@ -53,29 +54,29 @@ class AdminThemeControllerTest {
     }
 
     @Test
-    @DisplayName("테마 전체 조회 성공")
+    @DisplayName("테마 전체 조회 성공 - 매니저 소속 매장 테마만 반환")
     void 테마_전체_조회_성공() {
         RestAssured.given().log().all()
-                .header("X-Session-Id", loginAsAdmin())
+                .header("X-Session-Id", loginAsManager())
                 .when().get("/admin/themes")
                 .then().log().all()
                 .statusCode(200)
-                .body("size()", is(4));
+                .body("size()", is(2)); // store 1 에 테마A, 테마B
     }
 
     @Test
     @DisplayName("테마 삭제 성공")
     void 테마_삭제_성공() {
-        String adminCookie = loginAsAdmin();
+        String session = loginAsManager();
         Integer id = RestAssured.given().log().all()
-                .header("X-Session-Id", adminCookie)
+                .header("X-Session-Id", session)
                 .contentType(ContentType.JSON)
                 .body(themeBody())
                 .when().post("/admin/themes")
                 .then().extract().path("id");
 
         RestAssured.given().log().all()
-                .header("X-Session-Id", adminCookie)
+                .header("X-Session-Id", session)
                 .when().delete("/admin/themes/" + id)
                 .then().log().all()
                 .statusCode(204);

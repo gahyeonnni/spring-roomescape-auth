@@ -34,6 +34,12 @@ public class ThemeService {
                 .collect(Collectors.toList());
     }
 
+    public List<ThemeResponse> getThemesByStore(Long storeId) {
+        return themeRepository.findByStoreId(storeId).stream()
+                .map(ThemeResponse::of)
+                .collect(Collectors.toList());
+    }
+
     public List<ThemeResponse> getTopThemes(int limit) {
         LocalDate startDate = LocalDate.now().minusDays(7);
         LocalDate endDate = LocalDate.now();

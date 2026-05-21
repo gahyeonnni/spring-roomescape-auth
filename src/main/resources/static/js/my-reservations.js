@@ -74,6 +74,7 @@ function cancelReservation(id, btn) {
         showToast('예약이 취소되었습니다.', 'success');
         return;
       }
+      if (res.status === 403) throw new Error('본인의 예약만 취소할 수 있습니다.');
       return res.json().then(b => { throw new Error(b.message || '취소에 실패했습니다.'); });
     })
     .catch(err => showToast(err.message));
@@ -131,6 +132,7 @@ function submitEdit() {
   })
     .then(res => {
       if (res.ok) return res.json();
+      if (res.status === 403) throw new Error('본인의 예약만 변경할 수 있습니다.');
       return res.json().then(b => { throw new Error(b.message || '변경에 실패했습니다.'); });
     })
     .then(() => {

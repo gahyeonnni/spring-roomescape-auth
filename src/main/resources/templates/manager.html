@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>매장 관리 — ESCAPE ROOM ADMIN</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+  <link rel="stylesheet" href="/css/styles.css">
+</head>
+<body>
+<header class="topbar">
+  <div class="topbar-inner">
+    <a href="/theme" class="admin-entry is-admin" title="관리자 페이지">
+      <i class="fas fa-user-shield"></i><span>관리자 모드</span>
+    </a>
+    <a href="/" class="brand">
+      <span class="brand-mark"><i class="fas fa-key"></i></span>
+      ESCAPE ROOM
+    </a>
+    <button type="button" class="nav-toggle" aria-label="메뉴"><i class="fas fa-bars"></i></button>
+    <nav class="nav">
+      <a href="/theme">테마 관리</a>
+      <a href="/time">시간 관리</a>
+      <a href="/manager" class="active">매장 관리</a>
+      <a href="/">사용자 페이지</a>
+    </nav>
+    <button id="btn-logout" type="button" class="btn-logout" onclick="logout()">로그아웃</button>
+  </div>
+</header>
+
+<main class="container">
+  <h1 class="page-title">
+    <i class="fas fa-store" style="color:var(--accent);margin-right:10px;"></i>매장 관리
+  </h1>
+  <p class="page-subtitle">담당 매장의 테마와 예약을 관리합니다.</p>
+
+  <!-- 매장 탭 -->
+  <div id="store-tabs" style="display:flex;gap:10px;flex-wrap:wrap;margin-bottom:28px;"></div>
+  <div id="no-stores" class="empty d-none">관리 중인 매장이 없습니다.</div>
+
+  <!-- 섹션 탭 (테마 / 예약) -->
+  <div id="section-nav" class="d-none" style="display:flex;gap:0;margin-bottom:20px;border-bottom:2px solid var(--border);">
+    <button id="tab-themes" class="section-tab active" onclick="switchTab('themes')">
+      <i class="fas fa-theater-masks"></i> 테마
+    </button>
+    <button id="tab-reservations" class="section-tab" onclick="switchTab('reservations')">
+      <i class="fas fa-calendar-check"></i> 예약
+    </button>
+  </div>
+
+  <!-- 테마 섹션 -->
+  <div id="section-themes">
+    <div id="theme-grid" class="theme-grid"></div>
+    <div id="theme-empty" class="empty d-none">이 매장에 등록된 테마가 없습니다.</div>
+  </div>
+
+  <!-- 예약 섹션 -->
+  <div id="section-reservations" class="d-none">
+    <div class="table-container">
+      <table class="table">
+        <thead>
+          <tr>
+            <th>날짜</th>
+            <th>테마</th>
+            <th>시간</th>
+            <th>예약자</th>
+            <th style="width:180px;text-align:right;">관리</th>
+          </tr>
+        </thead>
+        <tbody id="reservation-tbody"></tbody>
+      </table>
+    </div>
+    <div id="reservation-empty" class="empty d-none" style="margin-top:16px;">이 매장의 예약이 없습니다.</div>
+  </div>
+</main>
+
+<!-- 예약 변경 모달 -->
+<div id="modal-overlay" class="modal-overlay d-none">
+  <div class="modal-card">
+    <h3 style="margin:0;font-size:1.1rem;font-weight:700;color:var(--text);">
+      <i class="fas fa-edit" style="color:var(--accent);margin-right:8px;"></i>예약 변경
+    </h3>
+    <div>
+      <label class="form-label">새 날짜</label>
+      <input id="edit-date" type="text" class="form-control" placeholder="날짜 선택" readonly>
+    </div>
+    <div>
+      <label class="form-label">새 시간</label>
+      <select id="edit-time" class="form-control">
+        <option value="">날짜를 먼저 선택해주세요.</option>
+      </select>
+    </div>
+    <div style="display:flex;gap:8px;justify-content:flex-end;">
+      <button id="edit-confirm" class="btn btn-primary">변경 확정</button>
+      <button id="edit-cancel" class="btn btn-secondary">닫기</button>
+    </div>
+  </div>
+</div>
+
+<style>
+.section-tab {
+  padding: 10px 24px;
+  border: none;
+  background: transparent;
+  color: var(--text-muted);
+  font-size: 0.95rem;
+  cursor: pointer;
+  border-bottom: 3px solid transparent;
+  margin-bottom: -2px;
+  transition: all .2s;
+}
+.section-tab.active {
+  color: var(--accent);
+  border-bottom-color: var(--accent);
+  font-weight: 600;
+}
+.section-tab i { margin-right: 6px; }
+</style>
+
+<script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+<script src="https://cdn.jsdelivr.net/npm/flatpickr/dist/l10n/ko.js"></script>
+<script src="/js/scripts.js"></script>
+<script src="/js/nav.js"></script>
+<script src="/js/manager.js"></script>
+</body>
+</html>

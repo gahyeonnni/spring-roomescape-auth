@@ -50,4 +50,14 @@ public class PageController {
     public String myReservations() {
         return "my-reservations";
     }
+
+    @GetMapping("/store")
+    public String stores() {
+        return "stores";
+    }
+
+    @GetMapping("/manager")
+    public String manager() {
+        return "manager";
+    }
 }

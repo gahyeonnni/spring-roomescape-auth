@@ -8,35 +8,49 @@ INSERT INTO reservation_time (start_at, finish_at) VALUES ('15:00', '16:00');
 INSERT INTO reservation_time (start_at, finish_at) VALUES ('16:00', '17:00');
 INSERT INTO reservation_time (start_at, finish_at) VALUES ('17:00', '18:00');
 
--- 테마 데이터
-INSERT INTO theme (name, description, image_url) VALUES ('월야애담', '강남점의 대표 한국 전통 호러 테마.', 'https://d1kqa23lh2nxjx.cloudfront.net/file/theme_info/%EC%9B%94%EC%95%BC__sizedown.png');
-INSERT INTO theme (name, description, image_url) VALUES ('살랑살랑 연구소', '강남점의 산뜻한 추리/장치형 테마.', 'https://d1kqa23lh2nxjx.cloudfront.net/file/theme_info/%EC%82%B4%EB%9E%91__sizedown.png');
-INSERT INTO theme (name, description, image_url) VALUES ('그카지말라캤자나', '강남점의 코믹한 사투리 감성 테마.', 'https://d1kqa23lh2nxjx.cloudfront.net/file/theme_info/%EA%B7%B8%EC%B9%B4%EC%A7%80__sizedown.png');
-INSERT INTO theme (name, description, image_url) VALUES ('홀리데이', '홍대점의 대표 감성 테마.', 'https://d1kqa23lh2nxjx.cloudfront.net/file/theme_info/%ED%99%80%EB%A6%AC%EB%8D%B0%EC%9D%B4_sizedown.png');
-INSERT INTO theme (name, description, image_url) VALUES ('삐릿뽀', '홍대점의 명랑한 추억 감성 테마.', 'https://d1kqa23lh2nxjx.cloudfront.net/file/theme_info/%EC%82%90%EB%A6%BF%EB%BD%80__sizedown.png');
-INSERT INTO theme (name, description, image_url) VALUES ('고백', '홍대점의 인생테마로 평가받는 감성 테마.', 'https://d1kqa23lh2nxjx.cloudfront.net/file/theme_info/%EA%B3%A0%EB%B0%B1__sizedown.png');
-INSERT INTO theme (name, description, image_url) VALUES ('머니머니패키지', '돈을 둘러싼 코믹 활극 테마.', 'https://d1kqa23lh2nxjx.cloudfront.net/file/theme_info/%EB%A8%B8%EB%8B%88%EB%A8%B8%EB%8B%88%ED%8C%A8%ED%82%A4%EC%A7%80_sizedown.png');
-INSERT INTO theme (name, description, image_url) VALUES ('셜록전화', '셜록 홈즈를 모티브로 한 추리 테마.', 'https://d1kqa23lh2nxjx.cloudfront.net/file/theme_info/%EC%85%9C%EB%A1%9D%EC%A0%84%ED%99%94__size%20down.png');
-INSERT INTO theme (name, description, image_url) VALUES ('파파라치', '특종을 좇는 파파라치가 되어 보는 테마.', 'https://d1kqa23lh2nxjx.cloudfront.net/file/theme_info/%ED%8C%8C%ED%8C%8C%EB%9D%BC%EC%B9%98_size%20down.png');
-INSERT INTO theme (name, description, image_url) VALUES ('정신병동', '오싹한 분위기의 호러 테마.', 'https://d1kqa23lh2nxjx.cloudfront.net/file/theme_info/%EC%A0%95%EC%8B%A0%EB%B3%91%EB%8F%99_size%20down.png');
-INSERT INTO theme (name, description, image_url) VALUES ('신비의숲', '환상적인 숲 속을 모험하는 테마.', 'https://d1kqa23lh2nxjx.cloudfront.net/file/theme_info/%EC%8B%A0%EB%B9%84%EC%9D%98%EC%88%B2__size%20down.png');
-INSERT INTO theme (name, description, image_url) VALUES ('난쟁이', '동화 속 세계관의 추리 테마.', 'https://d1kqa23lh2nxjx.cloudfront.net/file/theme_info/%EB%82%9C%EC%9F%81%EC%9D%B4_sizedown.png');
-INSERT INTO theme (name, description, image_url) VALUES ('산장', '외딴 산장에서 펼쳐지는 미스터리 테마.', 'https://d1kqa23lh2nxjx.cloudfront.net/file/theme_info/%EC%82%B0%EC%9E%A5_size%20down.png');
-INSERT INTO theme (name, description, image_url) VALUES ('혜화잡화점', '소소한 잡화점에서 시작되는 이야기 테마.', 'https://d1kqa23lh2nxjx.cloudfront.net/file/theme_info/%ED%98%9C%ED%99%94%EC%9E%A1%ED%99%94%EC%A0%90__sizedown.png');
-INSERT INTO theme (name, description, image_url) VALUES ('HAVE A GOOD TAPE', '카세트테이프를 둘러싼 감성 테마.', 'https://d1kqa23lh2nxjx.cloudfront.net/file/theme_info/haveagoodtape_size%20down.png');
-INSERT INTO theme (name, description, image_url) VALUES ('AFTERLIFE', '사후 세계를 다룬 분위기 있는 테마.', 'https://d1kqa23lh2nxjx.cloudfront.net/file/theme_info/afterlife_size%20down.png');
-INSERT INTO theme (name, description, image_url) VALUES ('아야코', '일본풍 호러 감성의 테마.', 'https://d1kqa23lh2nxjx.cloudfront.net/file/theme_info/%EC%95%84%EC%95%BC%EC%BD%94_size%20down.png');
-INSERT INTO theme (name, description, image_url) VALUES ('괴록', '기괴한 기록을 추적하는 호러 테마.', 'https://d1kqa23lh2nxjx.cloudfront.net/file/theme_info/%EA%B4%B4%EB%A1%9D_size%20down.png');
-INSERT INTO theme (name, description, image_url) VALUES ('투투 어드벤쳐', '활기찬 어드벤처 테마.', 'https://d1kqa23lh2nxjx.cloudfront.net/file/theme_info/%ED%88%AC%ED%88%AC%20%EC%96%B4%EB%93%9C%EB%B2%A4%EC%B3%90_size%20down.png');
-INSERT INTO theme (name, description, image_url) VALUES ('NOSTALGIA', '추억을 자극하는 감성 테마.', 'https://d1kqa23lh2nxjx.cloudfront.net/file/theme_info/nostalgia_sizedown.png');
-
 -- 유저 데이터
-INSERT INTO "user" (name, email, password, role) VALUES ('user1', 'user1@test.com', 'password1', 'ADMIN');
-INSERT INTO "user" (name, email, password, role) VALUES ('user2', 'user2@test.com', 'password2', 'USER');
-INSERT INTO "user" (name, email, password, role) VALUES ('user3', 'user3@test.com', 'password3', 'USER');
-INSERT INTO "user" (name, email, password, role) VALUES ('user4', 'user4@test.com', 'password4', 'USER');
-INSERT INTO "user" (name, email, password, role) VALUES ('user5', 'user5@test.com', 'password5', 'USER');
-INSERT INTO "user" (name, email, password, role) VALUES ('user6', 'user6@test.com', 'password6', 'USER');
+INSERT INTO "user" (name, email, password, role) VALUES ('user1', 'user1@test.com', 'password1', 'USER');   -- id = 1
+INSERT INTO "user" (name, email, password, role) VALUES ('user2', 'user2@test.com', 'password2', 'USER');   -- id = 2
+INSERT INTO "user" (name, email, password, role) VALUES ('user3', 'user3@test.com', 'password3', 'USER');   -- id = 3
+INSERT INTO "user" (name, email, password, role) VALUES ('user4', 'user4@test.com', 'password4', 'USER');   -- id = 4
+INSERT INTO "user" (name, email, password, role) VALUES ('user5', 'user5@test.com', 'password5', 'USER');   -- id = 5
+INSERT INTO "user" (name, email, password, role) VALUES ('user6', 'user6@test.com', 'password6', 'USER');   -- id = 6
+-- 강남매니저: 강남점(1) + 신촌점(3) + 건대점(4) 3개 관리
+INSERT INTO "user" (name, email, password, role) VALUES ('강남매니저', 'manager1@test.com', 'manager1', 'ADMIN'); -- id = 7
+-- 홍대매니저: 홍대점(2) 1개 관리
+INSERT INTO "user" (name, email, password, role) VALUES ('홍대매니저', 'manager2@test.com', 'manager2', 'ADMIN'); -- id = 8
+
+-- 매장 데이터
+INSERT INTO store (name, manager_id) VALUES ('강남점', 7);  -- id = 1
+INSERT INTO store (name, manager_id) VALUES ('홍대점', 8);  -- id = 2
+INSERT INTO store (name, manager_id) VALUES ('신촌점', 7);  -- id = 3
+INSERT INTO store (name, manager_id) VALUES ('건대점', 7);  -- id = 4
+
+-- 테마 데이터
+-- 강남점 (store_id=1)
+INSERT INTO theme (name, description, image_url, store_id) VALUES ('월야애담', '강남점의 대표 한국 전통 호러 테마.', 'https://d1kqa23lh2nxjx.cloudfront.net/file/theme_info/%EC%9B%94%EC%95%BC__sizedown.png', 1);
+INSERT INTO theme (name, description, image_url, store_id) VALUES ('살랑살랑 연구소', '강남점의 산뜻한 추리/장치형 테마.', 'https://d1kqa23lh2nxjx.cloudfront.net/file/theme_info/%EC%82%B4%EB%9E%91__sizedown.png', 1);
+INSERT INTO theme (name, description, image_url, store_id) VALUES ('그카지말라캤자나', '강남점의 코믹한 사투리 감성 테마.', 'https://d1kqa23lh2nxjx.cloudfront.net/file/theme_info/%EA%B7%B8%EC%B9%B4%EC%A7%80__sizedown.png', 1);
+INSERT INTO theme (name, description, image_url, store_id) VALUES ('머니머니패키지', '강남점의 코믹 활극 테마.', 'https://d1kqa23lh2nxjx.cloudfront.net/file/theme_info/%EB%A8%B8%EB%8B%88%EB%A8%B8%EB%8B%88%ED%8C%A8%ED%82%A4%EC%A7%80_sizedown.png', 1);
+INSERT INTO theme (name, description, image_url, store_id) VALUES ('셜록전화', '강남점의 셜록 홈즈 추리 테마.', 'https://d1kqa23lh2nxjx.cloudfront.net/file/theme_info/%EC%85%9C%EB%A1%9D%EC%A0%84%ED%99%94__size%20down.png', 1);
+INSERT INTO theme (name, description, image_url, store_id) VALUES ('파파라치', '강남점의 파파라치 체험 테마.', 'https://d1kqa23lh2nxjx.cloudfront.net/file/theme_info/%ED%8C%8C%ED%8C%8C%EB%9D%BC%EC%B9%98_size%20down.png', 1);
+-- 홍대점 (store_id=2)
+INSERT INTO theme (name, description, image_url, store_id) VALUES ('홀리데이', '홍대점의 대표 감성 테마.', 'https://d1kqa23lh2nxjx.cloudfront.net/file/theme_info/%ED%99%80%EB%A6%AC%EB%8D%B0%EC%9D%B4_sizedown.png', 2);
+INSERT INTO theme (name, description, image_url, store_id) VALUES ('삐릿뽀', '홍대점의 명랑한 추억 감성 테마.', 'https://d1kqa23lh2nxjx.cloudfront.net/file/theme_info/%EC%82%90%EB%A6%BF%EB%BD%80__sizedown.png', 2);
+INSERT INTO theme (name, description, image_url, store_id) VALUES ('고백', '홍대점의 인생테마로 평가받는 감성 테마.', 'https://d1kqa23lh2nxjx.cloudfront.net/file/theme_info/%EA%B3%A0%EB%B0%B1__sizedown.png', 2);
+INSERT INTO theme (name, description, image_url, store_id) VALUES ('아야코', '홍대점의 일본풍 호러 테마.', 'https://d1kqa23lh2nxjx.cloudfront.net/file/theme_info/%EC%95%84%EC%95%BC%EC%BD%94_size%20down.png', 2);
+INSERT INTO theme (name, description, image_url, store_id) VALUES ('괴록', '홍대점의 호러 기록 추적 테마.', 'https://d1kqa23lh2nxjx.cloudfront.net/file/theme_info/%EA%B4%B4%EB%A1%9D_size%20down.png', 2);
+INSERT INTO theme (name, description, image_url, store_id) VALUES ('혜화잡화점', '홍대점의 소소한 이야기 테마.', 'https://d1kqa23lh2nxjx.cloudfront.net/file/theme_info/%ED%98%9C%ED%99%94%EC%9E%A1%ED%99%94%EC%A0%90__sizedown.png', 2);
+-- 신촌점 (store_id=3)
+INSERT INTO theme (name, description, image_url, store_id) VALUES ('정신병동', '신촌점의 오싹한 호러 테마.', 'https://d1kqa23lh2nxjx.cloudfront.net/file/theme_info/%EC%A0%95%EC%8B%A0%EB%B3%91%EB%8F%99_size%20down.png', 3);
+INSERT INTO theme (name, description, image_url, store_id) VALUES ('신비의숲', '신촌점의 환상 모험 테마.', 'https://d1kqa23lh2nxjx.cloudfront.net/file/theme_info/%EC%8B%A0%EB%B9%84%EC%9D%98%EC%88%B2__size%20down.png', 3);
+INSERT INTO theme (name, description, image_url, store_id) VALUES ('난쟁이', '신촌점의 동화 속 추리 테마.', 'https://d1kqa23lh2nxjx.cloudfront.net/file/theme_info/%EB%82%9C%EC%9F%81%EC%9D%B4_sizedown.png', 3);
+INSERT INTO theme (name, description, image_url, store_id) VALUES ('산장', '신촌점의 외딴 산장 미스터리 테마.', 'https://d1kqa23lh2nxjx.cloudfront.net/file/theme_info/%EC%82%B0%EC%9E%A5_size%20down.png', 3);
+-- 건대점 (store_id=4)
+INSERT INTO theme (name, description, image_url, store_id) VALUES ('HAVE A GOOD TAPE', '건대점의 카세트 감성 테마.', 'https://d1kqa23lh2nxjx.cloudfront.net/file/theme_info/haveagoodtape_size%20down.png', 4);
+INSERT INTO theme (name, description, image_url, store_id) VALUES ('AFTERLIFE', '건대점의 사후세계 분위기 테마.', 'https://d1kqa23lh2nxjx.cloudfront.net/file/theme_info/afterlife_size%20down.png', 4);
+INSERT INTO theme (name, description, image_url, store_id) VALUES ('투투 어드벤쳐', '건대점의 활기찬 어드벤처 테마.', 'https://d1kqa23lh2nxjx.cloudfront.net/file/theme_info/%ED%88%AC%ED%88%AC%20%EC%96%B4%EB%93%9C%EB%B2%A4%EC%B3%90_size%20down.png', 4);
+INSERT INTO theme (name, description, image_url, store_id) VALUES ('NOSTALGIA', '건대점의 추억 감성 테마.', 'https://d1kqa23lh2nxjx.cloudfront.net/file/theme_info/nostalgia_sizedown.png', 4);
 
 -- 예약 데이터
 INSERT INTO reservation (date, time_id, theme_id, member_id) VALUES ('2026-05-15', 1, 1, 1);
@@ -46,40 +60,35 @@ INSERT INTO reservation (date, time_id, theme_id, member_id) VALUES ('2026-05-13
 INSERT INTO reservation (date, time_id, theme_id, member_id) VALUES ('2026-05-12', 1, 1, 5);
 INSERT INTO reservation (date, time_id, theme_id, member_id) VALUES ('2026-05-11', 1, 1, 6);
 
-INSERT INTO reservation (date, time_id, theme_id, member_id) VALUES ('2026-05-15', 3, 6, 1);
-INSERT INTO reservation (date, time_id, theme_id, member_id) VALUES ('2026-05-14', 3, 6, 2);
-INSERT INTO reservation (date, time_id, theme_id, member_id) VALUES ('2026-05-13', 3, 6, 3);
-INSERT INTO reservation (date, time_id, theme_id, member_id) VALUES ('2026-05-12', 3, 6, 4);
-INSERT INTO reservation (date, time_id, theme_id, member_id) VALUES ('2026-05-11', 3, 6, 5);
+INSERT INTO reservation (date, time_id, theme_id, member_id) VALUES ('2026-05-15', 3, 9, 1);
+INSERT INTO reservation (date, time_id, theme_id, member_id) VALUES ('2026-05-14', 3, 9, 2);
+INSERT INTO reservation (date, time_id, theme_id, member_id) VALUES ('2026-05-13', 3, 9, 3);
+INSERT INTO reservation (date, time_id, theme_id, member_id) VALUES ('2026-05-12', 3, 9, 4);
+INSERT INTO reservation (date, time_id, theme_id, member_id) VALUES ('2026-05-11', 3, 9, 5);
 
-INSERT INTO reservation (date, time_id, theme_id, member_id) VALUES ('2026-05-15', 4, 4, 1);
-INSERT INTO reservation (date, time_id, theme_id, member_id) VALUES ('2026-05-14', 4, 4, 2);
-INSERT INTO reservation (date, time_id, theme_id, member_id) VALUES ('2026-05-13', 4, 4, 3);
-INSERT INTO reservation (date, time_id, theme_id, member_id) VALUES ('2026-05-12', 4, 4, 4);
+INSERT INTO reservation (date, time_id, theme_id, member_id) VALUES ('2026-05-15', 4, 7, 1);
+INSERT INTO reservation (date, time_id, theme_id, member_id) VALUES ('2026-05-14', 4, 7, 2);
+INSERT INTO reservation (date, time_id, theme_id, member_id) VALUES ('2026-05-13', 4, 7, 3);
+INSERT INTO reservation (date, time_id, theme_id, member_id) VALUES ('2026-05-12', 4, 7, 4);
 
-INSERT INTO reservation (date, time_id, theme_id, member_id) VALUES ('2026-05-15', 5, 5, 1);
-INSERT INTO reservation (date, time_id, theme_id, member_id) VALUES ('2026-05-14', 5, 5, 2);
-INSERT INTO reservation (date, time_id, theme_id, member_id) VALUES ('2026-05-13', 5, 5, 3);
-INSERT INTO reservation (date, time_id, theme_id, member_id) VALUES ('2026-05-12', 5, 5, 4);
+INSERT INTO reservation (date, time_id, theme_id, member_id) VALUES ('2026-05-15', 5, 8, 1);
+INSERT INTO reservation (date, time_id, theme_id, member_id) VALUES ('2026-05-14', 5, 8, 2);
+INSERT INTO reservation (date, time_id, theme_id, member_id) VALUES ('2026-05-13', 5, 8, 3);
 
 INSERT INTO reservation (date, time_id, theme_id, member_id) VALUES ('2026-05-15', 6, 2, 1);
 INSERT INTO reservation (date, time_id, theme_id, member_id) VALUES ('2026-05-14', 6, 2, 2);
 INSERT INTO reservation (date, time_id, theme_id, member_id) VALUES ('2026-05-13', 6, 2, 3);
 
-INSERT INTO reservation (date, time_id, theme_id, member_id) VALUES ('2026-05-15', 7, 8, 1);
-INSERT INTO reservation (date, time_id, theme_id, member_id) VALUES ('2026-05-14', 7, 8, 2);
-INSERT INTO reservation (date, time_id, theme_id, member_id) VALUES ('2026-05-13', 7, 8, 3);
+INSERT INTO reservation (date, time_id, theme_id, member_id) VALUES ('2026-05-15', 7, 13, 1);
+INSERT INTO reservation (date, time_id, theme_id, member_id) VALUES ('2026-05-14', 7, 13, 2);
 
 INSERT INTO reservation (date, time_id, theme_id, member_id) VALUES ('2026-05-15', 8, 3, 1);
 INSERT INTO reservation (date, time_id, theme_id, member_id) VALUES ('2026-05-14', 8, 3, 2);
 
-INSERT INTO reservation (date, time_id, theme_id, member_id) VALUES ('2026-05-15', 1, 10, 1);
-INSERT INTO reservation (date, time_id, theme_id, member_id) VALUES ('2026-05-14', 1, 10, 2);
+INSERT INTO reservation (date, time_id, theme_id, member_id) VALUES ('2026-05-15', 1, 17, 1);
+INSERT INTO reservation (date, time_id, theme_id, member_id) VALUES ('2026-05-14', 1, 17, 2);
 
-INSERT INTO reservation (date, time_id, theme_id, member_id) VALUES ('2026-05-15', 2, 17, 1);
-INSERT INTO reservation (date, time_id, theme_id, member_id) VALUES ('2026-05-14', 2, 17, 2);
-
-INSERT INTO reservation (date, time_id, theme_id, member_id) VALUES ('2026-05-13', 3, 7, 1);
-INSERT INTO reservation (date, time_id, theme_id, member_id) VALUES ('2026-05-12', 4, 11, 1);
-INSERT INTO reservation (date, time_id, theme_id, member_id) VALUES ('2026-05-11', 5, 20, 1);
+INSERT INTO reservation (date, time_id, theme_id, member_id) VALUES ('2026-05-13', 3, 4, 1);
+INSERT INTO reservation (date, time_id, theme_id, member_id) VALUES ('2026-05-12', 4, 14, 1);
+INSERT INTO reservation (date, time_id, theme_id, member_id) VALUES ('2026-05-11', 5, 18, 1);
 INSERT INTO reservation (date, time_id, theme_id, member_id) VALUES ('2026-05-10', 8, 15, 1);

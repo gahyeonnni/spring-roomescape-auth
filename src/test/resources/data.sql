@@ -2,17 +2,25 @@ INSERT INTO reservation_time (start_at, finish_at) VALUES ('10:00', '11:00');
 INSERT INTO reservation_time (start_at, finish_at) VALUES ('14:00', '15:00');
 INSERT INTO reservation_time (start_at, finish_at) VALUES ('18:00', '19:00');
 
-INSERT INTO theme (name, description, image_url) VALUES ('테마A', '설명A', 'https://a.com');
-INSERT INTO theme (name, description, image_url) VALUES ('테마B', '설명B', 'https://b.com');
-INSERT INTO theme (name, description, image_url) VALUES ('테마C', '설명C', 'https://c.com');
-INSERT INTO theme (name, description, image_url) VALUES ('테마D', '설명D', 'https://d.com');
+-- user 먼저 (store FK 때문에)
+INSERT INTO "user" (name, email, password, role) VALUES ('user1', 'user1@test.com', 'password1', 'USER');   -- id = 1
+INSERT INTO "user" (name, email, password, role) VALUES ('user2', 'user2@test.com', 'password2', 'USER');   -- id = 2
+INSERT INTO "user" (name, email, password, role) VALUES ('user3', 'user3@test.com', 'password3', 'USER');   -- id = 3
+INSERT INTO "user" (name, email, password, role) VALUES ('user4', 'user4@test.com', 'password4', 'USER');   -- id = 4
+INSERT INTO "user" (name, email, password, role) VALUES ('user5', 'user5@test.com', 'password5', 'USER');   -- id = 5
+INSERT INTO "user" (name, email, password, role) VALUES ('admin', 'admin@test.com', 'admin', 'ADMIN');       -- id = 6
+INSERT INTO "user" (name, email, password, role) VALUES ('manager1', 'manager1@test.com', 'manager1', 'ADMIN'); -- id = 7
+INSERT INTO "user" (name, email, password, role) VALUES ('manager2', 'manager2@test.com', 'manager2', 'ADMIN'); -- id = 8
 
-INSERT INTO "user" (name, email, password, role) VALUES ('user1', 'user1@test.com', 'password1', 'USER');
-INSERT INTO "user" (name, email, password, role) VALUES ('user2', 'user2@test.com', 'password2', 'USER');
-INSERT INTO "user" (name, email, password, role) VALUES ('user3', 'user3@test.com', 'password3', 'USER');
-INSERT INTO "user" (name, email, password, role) VALUES ('user4', 'user4@test.com', 'password4', 'USER');
-INSERT INTO "user" (name, email, password, role) VALUES ('user5', 'user5@test.com', 'password5', 'USER');
-INSERT INTO "user" (name, email, password, role) VALUES ('admin', 'admin@test.com', 'admin', 'ADMIN');
+-- 매장
+INSERT INTO store (name, manager_id) VALUES ('강남점', 7); -- id = 1
+INSERT INTO store (name, manager_id) VALUES ('홍대점', 8); -- id = 2
+
+-- 테마 (store_id 포함)
+INSERT INTO theme (name, description, image_url, store_id) VALUES ('테마A', '설명A', 'https://a.com', 1);
+INSERT INTO theme (name, description, image_url, store_id) VALUES ('테마B', '설명B', 'https://b.com', 1);
+INSERT INTO theme (name, description, image_url, store_id) VALUES ('테마C', '설명C', 'https://c.com', 2);
+INSERT INTO theme (name, description, image_url, store_id) VALUES ('테마D', '설명D', 'https://d.com', 2);
 
 -- id 1: 과거 (past cancel/update 테스트)
 INSERT INTO reservation (date, time_id, theme_id, member_id) VALUES ('2026-05-10', 1, 1, 1);

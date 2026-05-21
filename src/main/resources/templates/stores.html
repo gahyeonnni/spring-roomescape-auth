@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>매장 — ESCAPE ROOM</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+  <link rel="stylesheet" href="/css/styles.css">
+</head>
+<body>
+<header class="topbar">
+  <div class="topbar-inner">
+    <a href="/theme" class="admin-entry" title="관리자 페이지" style="display:none">
+      <i class="fas fa-user-shield"></i><span>관리자</span>
+    </a>
+    <a href="/" class="brand">
+      <span class="brand-mark"><i class="fas fa-key"></i></span>
+      ESCAPE ROOM
+    </a>
+    <button type="button" class="nav-toggle" aria-label="메뉴"><i class="fas fa-bars"></i></button>
+    <nav class="nav">
+      <a href="/">홈</a>
+      <a href="/popular">인기 테마</a>
+      <a href="/store" class="active">매장</a>
+      <a href="/reservation">예약하기</a>
+      <a href="/my-reservations">내 예약</a>
+    </nav>
+    <a id="btn-login" href="/login" class="btn-logout" style="display:none">로그인</a>
+    <button id="btn-logout" type="button" class="btn-logout" onclick="logout()" style="display:none">로그아웃</button>
+  </div>
+</header>
+
+<main class="container">
+  <h1 class="page-title"><i class="fas fa-store" style="color:var(--accent);margin-right:10px;"></i>매장</h1>
+  <p class="page-subtitle">매장을 선택해 테마를 확인하세요.</p>
+
+  <div id="store-tabs" class="store-tabs" style="display:flex;gap:10px;flex-wrap:wrap;margin-bottom:28px;"></div>
+
+  <div class="section-head" style="margin-bottom:16px;">
+    <div>
+      <h2 id="store-section-title" class="section-title">전체 테마</h2>
+    </div>
+    <a href="/reservation" class="section-link">예약하러 가기 →</a>
+  </div>
+
+  <div id="store-theme-grid" class="theme-grid"></div>
+  <div id="store-theme-empty" class="empty d-none">이 매장에 등록된 테마가 없습니다.</div>
+</main>
+
+<script src="/js/scripts.js"></script>
+<script src="/js/nav.js"></script>
+<script src="/js/stores.js"></script>
+</body>
+</html>

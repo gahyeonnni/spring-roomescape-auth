@@ -24,7 +24,7 @@ class ThemeRepositoryTest {
     private ThemeFactory themeFactory;
 
     private Theme 테마() {
-        return themeFactory.create("테마5", "설명", "https://image.com");
+        return themeFactory.create("테마5", "설명", "https://image.com", 1L);
     }
 
     @Test

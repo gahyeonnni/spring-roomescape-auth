@@ -23,7 +23,8 @@ public class JdbcThemeRepository implements ThemeRepository {
             resultSet.getLong("id"),
             resultSet.getString("name"),
             resultSet.getString("description"),
-            resultSet.getString("image_url")
+            resultSet.getString("image_url"),
+            resultSet.getLong("store_id")
     );
 
     public JdbcThemeRepository(JdbcTemplate jdbcTemplate) {
@@ -38,9 +39,10 @@ public class JdbcThemeRepository implements ThemeRepository {
         SqlParameterSource parameters = new MapSqlParameterSource()
                 .addValue("name", theme.getName())
                 .addValue("description", theme.getDescription())
-                .addValue("image_url", theme.getImageUrl());
+                .addValue("image_url", theme.getImageUrl())
+                .addValue("store_id", theme.getStoreId());
         Long id = simpleJdbcInsert.executeAndReturnKey(parameters).longValue();
-        return Theme.restore(id, theme.getName(), theme.getDescription(), theme.getImageUrl());
+        return Theme.restore(id, theme.getName(), theme.getDescription(), theme.getImageUrl(), theme.getStoreId());
     }
 
     @Override
@@ -84,7 +86,23 @@ public class JdbcThemeRepository implements ThemeRepository {
     @Override
     public List<Theme> findAllByIds(List<Long> ids) {
         String placeholders = ids.stream().map(id -> "?").collect(Collectors.joining(", "));
-        String query = "SELECT id, name, description, image_url FROM theme WHERE id IN (" + placeholders + ") ORDER BY id ASC";
+        String query = "SELECT id, name, description, image_url, store_id FROM theme WHERE id IN (" + placeholders + ") ORDER BY id ASC";
         return jdbcTemplate.query(query, rowMapper, ids.toArray());
+    }
+
+    @Override
+    public List<Theme> findByStoreId(Long storeId) {
+        String query = "SELECT id, name, description, image_url, store_id FROM theme WHERE store_id = ? ORDER BY id ASC";
+        return jdbcTemplate.query(query, rowMapper, storeId);
+    }
+
+    @Override
+    public List<Theme> findAllByStoreIds(List<Long> storeIds) {
+        if (storeIds.isEmpty()) {
+            return List.of();
+        }
+        String placeholders = storeIds.stream().map(id -> "?").collect(Collectors.joining(", "));
+        String query = "SELECT id, name, description, image_url, store_id FROM theme WHERE store_id IN (" + placeholders + ") ORDER BY id ASC";
+        return jdbcTemplate.query(query, rowMapper, storeIds.toArray());
     }
 }

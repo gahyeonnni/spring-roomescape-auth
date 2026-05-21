@@ -14,4 +14,6 @@ public interface ThemeRepository {
     void deleteById(Long id);
     List<Long> findTopThemeIds(LocalDate startDate, LocalDate endDate, int limit);
     List<Theme> findAllByIds(List<Long> ids);
+    List<Theme> findAllByStoreIds(List<Long> storeIds);
+    List<Theme> findByStoreId(Long storeId);
 }

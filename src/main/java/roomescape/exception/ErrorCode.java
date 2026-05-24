@@ -24,6 +24,7 @@ public enum ErrorCode {
     FORBIDDEN_STORE_ACCESS(HttpStatus.FORBIDDEN, "해당 매장에 대한 접근 권한이 없습니다."),
 
     // 409 - CONFLICT
+    ALREADY_LOGGED_IN(HttpStatus.CONFLICT, "이미 다른 기기에서 로그인된 계정입니다."),
     DUPLICATE_EMAIL(HttpStatus.CONFLICT, "이미 사용 중인 이메일입니다."),
     DUPLICATE_RESERVATION(HttpStatus.CONFLICT, "이미 예약된 시간입니다."),
     TIME_HAS_RESERVATION(HttpStatus.CONFLICT, "예약이 존재하는 시간은 삭제할 수 없습니다."),

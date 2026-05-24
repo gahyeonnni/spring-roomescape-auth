@@ -7,6 +7,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import roomescape.auth.LoginMember;
 import roomescape.auth.LoginRequired;
+import roomescape.auth.SingleSessionRegistry;
 import roomescape.user.domain.User;
 import roomescape.user.dto.LoginRequest;
 import roomescape.user.dto.LoginResponse;
@@ -23,9 +24,11 @@ import java.util.Map;
 public class UserController {
 
     private final UserService userService;
+    private final SingleSessionRegistry sessionRegistry;
 
-    public UserController(UserService userService) {
+    public UserController(UserService userService, SingleSessionRegistry sessionRegistry) {
         this.userService = userService;
+        this.sessionRegistry = sessionRegistry;
     }
 
     @PostMapping
@@ -37,13 +40,16 @@ public class UserController {
     @PostMapping("/login")
     public ResponseEntity<LoginResponse> login(@Valid @RequestBody LoginRequest request, HttpSession session) {
         User user = userService.login(request);
+        sessionRegistry.register(user.getId(), session.getId());
         session.setAttribute("loginMemberId", user.getId());
         session.setAttribute("loginMemberRole", user.getRole().name());
         return ResponseEntity.ok(new LoginResponse(session.getId(), user.getRole().name()));
     }
 
+    @LoginRequired
     @PostMapping("/logout")
-    public ResponseEntity<Void> logout(HttpSession session) {
+    public ResponseEntity<Void> logout(@LoginMember User loginUser, HttpSession session) {
+        sessionRegistry.remove(loginUser.getId());
         session.invalidate();
         return ResponseEntity.ok().build();
     }

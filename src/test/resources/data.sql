@@ -27,14 +27,14 @@ INSERT INTO reservation (date, time_id, theme_id, member_id) VALUES ('2026-05-10
 -- id 2
 INSERT INTO reservation (date, time_id, theme_id, member_id) VALUES ('2026-05-09', 1, 1, 2);
 -- id 3-5: 최근 7일, 테마A (인기 테마 테스트 - 3건)
-INSERT INTO reservation (date, time_id, theme_id, member_id) VALUES ('2026-05-14', 1, 1, 3);
-INSERT INTO reservation (date, time_id, theme_id, member_id) VALUES ('2026-05-13', 1, 1, 4);
-INSERT INTO reservation (date, time_id, theme_id, member_id) VALUES ('2026-05-12', 1, 1, 5);
+INSERT INTO reservation (date, time_id, theme_id, member_id) VALUES ('2026-05-23', 1, 1, 3);
+INSERT INTO reservation (date, time_id, theme_id, member_id) VALUES ('2026-05-22', 1, 1, 4);
+INSERT INTO reservation (date, time_id, theme_id, member_id) VALUES ('2026-05-21', 1, 1, 5);
 -- id 6-7: 최근 7일, 테마B (인기 테마 테스트 - 2건)
-INSERT INTO reservation (date, time_id, theme_id, member_id) VALUES ('2026-05-14', 1, 2, 1);
-INSERT INTO reservation (date, time_id, theme_id, member_id) VALUES ('2026-05-13', 1, 2, 2);
+INSERT INTO reservation (date, time_id, theme_id, member_id) VALUES ('2026-05-23', 1, 2, 1);
+INSERT INTO reservation (date, time_id, theme_id, member_id) VALUES ('2026-05-22', 1, 2, 2);
 -- id 8: 최근 7일, 테마C (인기 테마 테스트 - 1건)
-INSERT INTO reservation (date, time_id, theme_id, member_id) VALUES ('2026-05-14', 2, 3, 1);
+INSERT INTO reservation (date, time_id, theme_id, member_id) VALUES ('2026-05-23', 2, 3, 1);
 -- id 9: 7일 범위 밖, 테마D
 INSERT INTO reservation (date, time_id, theme_id, member_id) VALUES ('2026-05-01', 1, 4, 1);
 -- id 10: 예약 가능 시간 조회 테스트용 (2026-05-10, theme 1, time 1 은 id 1로 이미 예약됨)
